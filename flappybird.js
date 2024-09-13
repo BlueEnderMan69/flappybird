@@ -108,7 +108,7 @@ function draw() {
         ctx.font = '30px Arial';
         ctx.fillText('Game Over', canvas.width / 2 - 70, canvas.height / 2);
         ctx.font = '15px Arial';
-        ctx.fillText('Press any key to restart', canvas.width / 2 - 90, canvas.height / 2 + 30);
+        ctx.fillText('refresh to restart!', canvas.width / 2 - 90, canvas.height / 2 + 30);
         return;
     }
 
