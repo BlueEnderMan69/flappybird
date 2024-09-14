@@ -14,7 +14,7 @@ let gravity = 0.5;
 
 let pipes = [];
 let pipeWidth = 100;
-let pipeGap = birdRadius * 6.9 + Math.random() * birdRadius;
+let pipeGap = birdRadius * 8 + Math.random() * birdRadius; // Adjusted gap size for pipes
 let pipeSpeed = 3;
 
 let score = 0;
@@ -79,7 +79,7 @@ function init() {
 // Add a new pipe
 function addPipe() {
     const pipeHeight = Math.floor(Math.random() * (canvas.height / 2));
-    pipeGap = birdRadius * 8 + Math.random() * birdRadius;
+    pipeGap = birdRadius * 8 + Math.random() * birdRadius; // Set pipe gap 8x the bird's radius
     pipes.push({
         x: canvas.width,
         y: pipeHeight
@@ -165,4 +165,3 @@ canvas.addEventListener("click", () => {
 
 // Start the game
 showStartScreen();
-
