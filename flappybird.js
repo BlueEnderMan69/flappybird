@@ -14,7 +14,7 @@ let gravity = 0.5;
 
 let pipes = [];
 let pipeWidth = 100;
-let pipeGap = birdRadius * 5 + Math.random() * birdRadius;
+let pipeGap = birdRadius * 6.9 + Math.random() * birdRadius;
 let pipeSpeed = 3;
 
 let score = 0;
