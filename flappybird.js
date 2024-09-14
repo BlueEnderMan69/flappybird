@@ -2,7 +2,7 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 // Game variables
-let bird, pipes, frame, score, gameOver, birdImage, pipeUpImage, pipeDownImage;
+let bird, pipes, frame, score, gameOver, birdImage, pipeUpImage, pipeDownImage, waitingForRestart;
 
 // Initialize game state
 function init() {
@@ -12,6 +12,7 @@ function init() {
     frame = 0;
     score = 0;
     gameOver = false;
+    waitingForRestart = false;
 
     // Load bird image
     birdImage = new Image();
@@ -25,12 +26,12 @@ function init() {
     pipeDownImage.src = 'sprites/pipe-down.png'; // Path to the bottom pipe image
 }
 
-// Handle bird flap on key press or touch
-function flap() {
+// Handle bird flap or restart the game
+function flapOrRestart() {
     if (!gameOver) {
         bird.velocity = -bird.lift;
-    } else {
-        init(); // Restart game on key press or tap
+    } else if (waitingForRestart) {
+        init(); // Restart game on key press or click after game over
     }
 }
 
@@ -40,10 +41,10 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 
-// Event listeners for flap and window resizing
-document.addEventListener('keydown', flap);
-document.addEventListener('click', flap);
-document.addEventListener('touchstart', flap);
+// Event listeners for flap or restarting and window resizing
+document.addEventListener('keydown', flapOrRestart);
+document.addEventListener('click', flapOrRestart);
+document.addEventListener('touchstart', flapOrRestart);
 window.addEventListener('resize', resizeCanvas); // Resize the canvas when the window is resized
 
 // Main game loop
@@ -83,6 +84,7 @@ function draw() {
             bird.y + bird.height > pipe.y
         ) {
             gameOver = true;
+            waitingForRestart = true;
         }
 
         // Remove off-screen pipes and update score
@@ -95,6 +97,7 @@ function draw() {
     // Check if bird hits the ground or the top of the canvas
     if (bird.y + bird.height >= canvas.height || bird.y <= 0) {
         gameOver = true;
+        waitingForRestart = true;
     }
 
     // Draw score
@@ -108,7 +111,7 @@ function draw() {
         ctx.font = '30px Arial';
         ctx.fillText('Game Over', canvas.width / 2 - 70, canvas.height / 2);
         ctx.font = '15px Arial';
-        ctx.fillText('refresh to restart!', canvas.width / 2 - 90, canvas.height / 2 + 30);
+        ctx.fillText('Press any key or click to restart', canvas.width / 2 - 100, canvas.height / 2 + 30);
         return;
     }
 
@@ -119,3 +122,4 @@ function draw() {
 // Start the game
 init();
 draw();
+
