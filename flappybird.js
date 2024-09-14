@@ -79,7 +79,7 @@ function init() {
 // Add a new pipe
 function addPipe() {
     const pipeHeight = Math.floor(Math.random() * (canvas.height / 2));
-    pipeGap = birdRadius * 5 + Math.random() * birdRadius;
+    pipeGap = birdRadius * 6.5 + Math.random() * birdRadius;
     pipes.push({
         x: canvas.width,
         y: pipeHeight
