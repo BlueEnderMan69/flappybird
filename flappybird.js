@@ -122,4 +122,3 @@ function draw() {
 // Start the game
 init();
 draw();
-
